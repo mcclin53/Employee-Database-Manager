@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS ;
-CREATE DATABASE ;
+DROP DATABASE IF EXISTS employeeManager_db;
+CREATE DATABASE employeeManager_db;
 
-/c ;
+/c employeeManager_db;
 
 CREATE TABLE employees(
     employee_id SERIAL PRIMARY KEY,
