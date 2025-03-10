@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { pool } from '../src/connection.js';
+import { pool } from './connection.js';
 
 pool.connect();
 
