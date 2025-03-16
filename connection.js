@@ -20,6 +20,6 @@ const connectToDb = async () => {
     console.error('Error connecting to database:', err);
     process.exit(1);
   }
-};
+};``
 
-export { pool, connectToDb };
+export { pg, pool, connectToDb };

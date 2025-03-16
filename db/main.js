@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import { pool } from './connection.js';
+import { pool } from '../connection.js';
 
 pool.connect();
 
@@ -72,13 +72,14 @@ function updateEmployee(employeeId, newRoleId) {
         }
         });
     }
+function mainMenu() {
 inquirer
     .prompt([
         {
             type: 'list',
             message: 'What would you like to do?',
             name: 'menu',
-            choices: ['View all departments','View all roles','View all employees','Add a department','Add a role', 'Add an employee', 'Update an employee role'],
+            choices: ['View all departments','View all roles','View all employees','Add a department','Add a role', 'Add an employee', 'Update an employee role', 'Exit'],
         }    
     ])
     .then((answer) => {
@@ -94,7 +95,9 @@ inquirer
             break;
             case 'Add a department':
                 inquirer.prompt([{ type: 'input', name: 'departmentName', message: 'Enter the department name:' }])
-                .then(({ departmentName }) => addDepartment(departmentName));
+                .then(({ departmentName }) => { addDepartment(departmentName);
+                mainMenu();
+            });
             break;
             case 'Add a role':
                 inquirer.prompt([
@@ -102,7 +105,10 @@ inquirer
                     { type: 'input', name: 'salary', message: 'Enter the salary:' },
                     { type: 'input', name: 'departmentId', message: 'Enter the department ID:' }
                 ])
-                .then(({ jobTitle, salary, departmentId }) => addRole(jobTitle, salary, departmentId));
+                .then(({ jobTitle, salary, departmentId }) => {
+                addRole(jobTitle, salary, departmentId);
+                mainMenu();
+            });
             break;
             case 'Add an employee':
                 inquirer.prompt([
@@ -110,14 +116,25 @@ inquirer
                     { type: 'input', name: 'lastName', message: 'Enter the last name:' },
                     { type: 'input', name: 'roleId', message: 'Enter the role ID:' }
                 ])
-                .then(({ firstName, lastName, roleId }) => addEmployee(firstName, lastName, roleId));
+                .then(({ firstName, lastName, roleId }) => {
+                addEmployee(firstName, lastName, roleId);
+                mainMenu();
+                });
             break;
             case 'Update an employee role':
                 inquirer.prompt([
                     { type: 'input', name: 'employeeId', message: 'Enter the employee ID:' },
                     { type: 'input', name: 'newRoleId', message: 'Enter the new role ID:' }
                 ])
-                .then(({ employeeId, newRoleId }) => updateEmployee(employeeId, newRoleId));
+                .then(({ employeeId, newRoleId }) => {
+                updateEmployee(employeeId, newRoleId);
+                mainMenu();
+                });
             break;
+            case 'Exit':
+                console.log('Exiting the application.');
+                pool.end();
+                break;
         }
     });
+}
