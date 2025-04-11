@@ -1,6 +1,8 @@
 import inquirer from 'inquirer';
-import { pool } from '../connection.js';
+import dotenv from 'dotenv';
+import { pool, connectToDb } from './connection';
 
+dotenv.config();
 pool.connect();
 
 function displayDepartments() {
