@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 import dotenv from 'dotenv';
-import { pool, connectToDb } from './connection';
+import { pool } from './connection.js';
 
 dotenv.config();
 pool.connect();
@@ -12,6 +12,7 @@ function displayDepartments() {
     } else {
     console.log(result.rows);
     }
+    mainMenu();
     });
 }
 
@@ -22,6 +23,7 @@ function displayRoles() {
         } else {
         console.log(result.rows);
         }
+        mainMenu();
         });
     }
 
@@ -32,10 +34,11 @@ function displayRoles() {
         } else {
         console.log(result.rows);
         }
+        mainMenu();
         });
     }
 
-function addDepartment(departmentName) {
+function addDepartment(departmentName: string) {
     pool.query('INSERT INTO departments (department_name) VALUES ($1)', [departmentName], (err, result) => {
         if (err) {
         console.log(err);
@@ -45,7 +48,7 @@ function addDepartment(departmentName) {
         });
     }
 
-function addRole(jobTitle, salary, departmentId) {
+function addRole(jobTitle: string, salary: number, departmentId: number) {
     pool.query('INSERT INTO roles (job_title, salary, department_id) VALUES ($1, $2, $3)', [jobTitle, salary, departmentId], (err, result) => {
         if (err) {
         console.log(err);
@@ -55,8 +58,8 @@ function addRole(jobTitle, salary, departmentId) {
         });
     }
 
-function addEmployee(firstName, lastName, roleId) {
-    pool.query('INSERT INTO employees (first_name, last_name, role_id) VALUES ($1, $2, $3),', [firstName, lastName, roleId], (err, result) => {
+function addEmployee(firstName: string, lastName: string, roleId: number) {
+    pool.query('INSERT INTO employees (first_name, last_name, role_id) VALUES ($1, $2, $3)', [firstName, lastName, roleId], (err, result) => {
         if (err) {
         console.log(err);
         } else {
@@ -65,8 +68,8 @@ function addEmployee(firstName, lastName, roleId) {
         });
     }
 
-function updateEmployee(employeeId, newRoleId) {
-    pool.query('UPDATE INTO employees SET role_id = $1 WHERE id = $2', [employeeId, newRoleId], (err, result) => {
+function updateEmployee(employeeId: number, newRoleId: number) {
+    pool.query('UPDATE employees SET role_id = $1 WHERE id = $2', [newRoleId, employeeId], (err, result) => {
         if (err) {
         console.log(err);
         } else {
