@@ -15,4 +15,4 @@ VALUES  ('Administration'),
 INSERT INTO roles (job_title, salary, department_id)
 VALUES  ('Sales Representative', 50000, 2),
         ('Benefits Specialist', 70000, 3),
-        ('Clerk', 30000, 1),
+        ('Clerk', 30000, 1);
