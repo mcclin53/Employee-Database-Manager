@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -20,6 +17,6 @@ const connectToDb = async () => {
     console.error('Error connecting to database:', err);
     process.exit(1);
   }
-};``
+};
 
-export { pg, pool, connectToDb };
+export { pool, connectToDb };

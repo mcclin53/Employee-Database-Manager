@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS employeeManager_db;
-CREATE DATABASE employeeManager_db;
+DROP DATABASE IF EXISTS employeemanager_db;
+CREATE DATABASE employeemanager_db;

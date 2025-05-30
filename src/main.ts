@@ -1,9 +1,28 @@
 import inquirer from 'inquirer';
 import dotenv from 'dotenv';
-import { pool } from './connection.js';
+import pkg from 'pg';
+const { Pool } = pkg;
+
 
 dotenv.config();
-pool.connect();
+
+const pool = new Pool({
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: 'localhost',
+  database: process.env.DB_NAME,
+  port: 5432,
+});
+
+const connectToDb = async () => {
+  try {
+    await pool.connect();
+    console.log('Connected to the database.');
+  } catch (err) {
+    console.error('Error connecting to database:', err);
+    process.exit(1);
+  }
+};
 
 function displayDepartments() {
     pool.query('SELECT * FROM departments', (err, result) => {
@@ -143,3 +162,7 @@ inquirer
         }
     });
 }
+
+connectToDb().then(() => {
+  mainMenu();
+});
