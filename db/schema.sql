@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS employeemanager_db;
+CREATE DATABASE employeemanager_db;
+
+\c employeemanager_db;
+
 CREATE TABLE departments (
     department_id SERIAL PRIMARY KEY,
     department_name VARCHAR(30) NOT NULL

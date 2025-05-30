@@ -29,7 +29,7 @@ function displayDepartments() {
     if (err) {
     console.log(err);
     } else {
-    console.log(result.rows);
+    console.table(result.rows);
     }
     mainMenu();
     });
@@ -40,7 +40,7 @@ function displayRoles() {
         if (err) {
         console.log(err);
         } else {
-        console.log(result.rows);
+        console.table(result.rows);
         }
         mainMenu();
         });
@@ -51,7 +51,7 @@ function displayRoles() {
         if (err) {
         console.log(err);
         } else {
-        console.log(result.rows);
+        console.table(result.rows);
         }
         mainMenu();
         });
@@ -62,7 +62,7 @@ function addDepartment(departmentName: string) {
         if (err) {
         console.log(err);
         } else {
-        console.log('Department added: ', result.rows);
+        console.table('Department added: ', result.rows);
         }
         });
     }
@@ -72,7 +72,7 @@ function addRole(jobTitle: string, salary: number, departmentId: number) {
         if (err) {
         console.log(err);
         } else {
-        console.log('Role added: ', result.rows);
+        console.table('Role added: ', result.rows);
         }
         });
     }
@@ -82,13 +82,14 @@ function addEmployee(firstName: string, lastName: string, roleId: number) {
         if (err) {
         console.log(err);
         } else {
-        console.log(result.rows);
+        console.table(result.rows);
         }
         });
     }
 
 function updateEmployee(employeeId: number, newRoleId: number) {
-    pool.query('UPDATE employees SET role_id = $1 WHERE id = $2', [newRoleId, employeeId], (err, result) => {
+   // console.log("Incoming data: ", employeeId, newRoleId);
+    pool.query('UPDATE employees SET role_id = $1 WHERE employee_id = $2', [newRoleId, employeeId], (err, result) => {
         if (err) {
         console.log(err);
         } else {
