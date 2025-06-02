@@ -19,7 +19,7 @@ Install node and include the inquirer and pg packages using "npm i"  and "npm ru
   ## Usage
 In the terminal type: "psql - postgres". Then type your password. After that type" \i db/schema.sql" and "\i db/seeds.sql" to create and seed your employee database. Once that is complete type "\q" to quit. Then start the application by running "npm start". Follow the prompts to view and alter your database.
 
-Video demonstration: [Video](https://www.youtube.com/watch?v=G_TkBhGIfo0)
+Video demonstration: [Video](https://www.youtube.com/watch?v=WabUCbRThXg)
 
   ## Contributing
 Contribute please.
